@@ -1,4 +1,4 @@
-cp -ur ~/文档 ~/HaiZei
+cp -ur /home/qx/文档 /home/qx/HaiZei
 git add *
 git commit -m "$(date)"
 git push -u origin master
