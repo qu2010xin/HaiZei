@@ -1,4 +1,4 @@
-cp -ru /home/qx/文档 /home/qx/HaiZei > /home/qx/github.log
-git add * > /home/qx/github.log
-git commit -m "$(date)" > /home/qx/github.log
-git push -u origin master > /home/qx/github.log
+cp -ru /home/qx/文档 /home/qx/HaiZei>>/home/qx/github.log
+git add *>>/home/qx/github.log
+git commit -m "$(date)">>/home/qx/github.log
+git push -u origin master>>/home/qx/github.log
