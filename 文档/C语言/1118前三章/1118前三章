@@ -1,0 +1,57 @@
+1118
+   扩展:
+      'a'  是97
+      ‘0’  是48
+      1e9 : 1 * 10的9次方
+      29个头文件
+      
+   练习:
+      输出：  abc
+             bcd
+             cde
+         int n = 0x636261;
+          for(int i = 0; i < 3; i++)
+          {
+            printf("%s\n",(char *)(&n));
+            n += 0x010101;
+          }
+   C 语言:
+        第一章
+            printf(const char * format,...);
+                format:  格式控制字符串(占位符)
+                //格式化字符串
+                ... :    参数列表
+                返回值:   成功输出的字符串个数  (不包括'\0') 
+            scanf(const char * format,...);
+                format
+                ...
+                返回值:   成功读入变量个数  (合法限制: 0 ~ 极大值     若返回 -1 表示读到了末位)
+            sprintf(const char *s,const char * format,...);
+                将字符串输出到 字符串s 中去
+
+            读入一行字符串(包括分隔符 空格)  用 scanf("%[^\n]s",s);  这样 '\n'之前的字符串全被读入到s中  而标准输入文件 "偏移量"仍停在 标准输入文件的\n处
+        第二章
+            math.h 常用函数
+                pow()
+                log() 以e为底  换底公式: log5(10) = log(10)/log(5)
+                acos(double x) 是arccos(x)  pi = acos(-1);   (事实上  x为角度的弧度值)
+                而abs() 在stdlib.h(标准库)
+        第三章 
+            指针 
+                int *p = &a;   为什么前面必须有 int (因为，1:当 p + 1 时，p的地址值将加 sizeof(int),其他类型同理 2: 当取内容赋值时 如 *p = 5 ，将对sizeof(int)大小的单元补齐)
+            流程控制
+              分支判断
+              循环过程
+                  分支
+                    任何表达式:都有返回值
+                    a = 6;b = !!a;  // a = 1 (归一化) 
+                    条件表达式 是 表达式 的分支
+                          switch case 中 每一个 case 作用域不一样比如:
+                               int n = 2;
+                                switch(n)
+                                {
+                                  case 1: int a = 2;
+                                  case 2: a = 4;
+                                  case 3: printf("%d\n",a );
+                                }
+                          编译不通过

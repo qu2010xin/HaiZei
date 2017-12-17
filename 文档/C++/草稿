@@ -1,0 +1,46 @@
+
+扩展:
+	'0': 48
+	'a': 97
+	'A': 65
+	' ': 32
+
+牛顿法    quake3???
+
+浮点型 标准
+
+
+执行子进程是为了防止 主进程崩溃
+创建多个子进程并执行
+
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/wait.h>
+
+int main()
+{
+	int pid_arr[3] = {0};
+	int i = 1;
+	int l = 0;
+	int r = 0;
+	for(i = 0; i < 3; i++)
+	{
+		l = i * 10000 + 1;
+		r = l + 10000; 
+		pid_arr[i] = fork();
+		if(pid_arr[i] == 0) break;
+	}
+	if(pid_arr[i] == 0)
+	{
+		//子进程
+		exit(1);
+	}
+	else
+	{
+		for(int i = 0; i < 3; i++)
+		{
+			waitpid(pid_arr[i], NULL, 0);
+		}
+	}
+}

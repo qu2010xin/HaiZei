@@ -1,0 +1,61 @@
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/wait.h>
+#include <stdio.h>
+#define max_num 30005
+int primes[max_num] = {0};
+int prime(int *arr, int l, int r)
+{
+	for(int i = 2; i < r; i++)
+	{
+		if(primes[i] == 0)
+		{
+			primes[++primes[0]] = i;
+			if(i >= l)
+			{
+				arr[++arr[0]] = i;
+			}
+		}
+		for(int j = 1; j <= primes[0]; j++)
+		{
+			if(primes[j] * i > r) 	continue;
+			primes[primes[j] * i] = 1;
+			if(primes[j] % i == 0) 	break; 
+		}
+	}
+}
+
+int main()
+{
+	int pid_arr[3];
+	int temp = 0;
+	int arr[max_num] = {0};
+	int i;
+	int l ,r = 0;
+	char s[] = "\033[;31m%10d\033[0m";
+	for(i = 0; i < 3; i++)
+	{
+		l = r;
+		r += 10000;
+		pid_arr[i] = fork();
+		if(pid_arr[i] == 0) break;
+	}
+	if(pid_arr[i] == 0 && i < 3)
+	{
+		prime(arr, l, r);
+		s[4] += i;
+		for(int i = 1; i <= arr[0]; i++)
+		{
+			printf(s, arr[i]);
+			if(i % 5 == 0 || i == arr[0]) printf("\n");
+		}
+		exit(1);
+	}
+	else
+	{
+		printf("to wait 0\n");
+		waitpid(pid_arr[0], NULL, 0);   //????   wait 1 0有问题
+		printf("hello world\n");
+	}
+}

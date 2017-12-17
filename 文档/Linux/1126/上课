@@ -1,0 +1,81 @@
+
+
+w    当前用户登录和正在执行的进程
+     tty  虚拟终端
+
+who  <file   | a1 a2> 也可以没有参数
+	-H (show the headers) 
+  	-u (space relax time)
+	-a 
+	-q (numbers of user) 
+who am i
+	name of user
+echo "">> 
+last    显示用户最近登录信息
+	[fnx] <username> <tty>
+	-f
+	-n
+	-x
+uname 打印当前系统信息
+	-a 系统名称 主机名称
+	-m type of computer
+ 	-n name of net hosts
+	-v os  banben 
+	-p type of cpu
+	-i hardware
+	-o name of os
+date 日期
+	-d "string" 显示字符串制定的日期
+	-s "string" 设置时间
+	-u  UTC time
+	date +"string" "%Y-%m-%d %H-%M-%S "
+
+cal 显示日历
+	-l    -3 or -1   3 months or 1 month
+	-hyj   h month  y year  j day 
+	-m  n  the nth month
+	
+	
+脚本
+	开头是 #!/bin/bash  代表用/bin/bash执行
+ 	haizei=`ls`
+	haizei=$(ls)
+	echo $haizei和echo $haizei1相同
+
+#扩展
+#   cat /etc/passwd |cut -d ":" -f 1
+#   将/etc/passwd 传入管道 并 用":"分隔  然后取第一列就是用户
+
+
+#实践  显示pi 以pts/0身份登录
+#last pi| grep "pts/0"  列出last后作为grep 的输入 并且筛选出 “pts/0”的echo
+
+
+#实践
+#在root 的.bash_logout 内写脚本 完成  当root用户 对其他用户家
+		#!/bin.bash
+		echo ".bash_logout hello"
+		haizei=$(ls /home)
+		for i in $haizei; do
+		#	cd /home/$i
+			chown -R $i:$i /home/$i
+		#	hh=$(ls /home/$i)
+		#	for j in $hh; do
+		#		chown $i:$i /home/$i/$j
+		#	done  
+		done
+		echo "权限已修正"
+
+#第二种写法  假如/home下有其他非用户类文件 得用下面方法
+		USER_NAME=`cat /etc/passwd |cut -d ":" -f 1`
+		for i in $USER_NAME; do
+			ls /home/$i
+			if[[$? -eq 0]]; then
+				chown -R $i:$i /home/$i
+			fi
+		done
+
+
+
+
+

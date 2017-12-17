@@ -1,0 +1,122 @@
+
+        sudo -i 
+        
+        源: apt  下载软件时需要到  网易 阿里 清华等基站下载  这些地方就是 源   而本地会对下载站列表建立缓存，若缓存的版本较低，可以用 apt-get update
+        apt-get update
+	apt-get upgrade
+	apt-cache search
+	apt-get dpkg	
+
+	dpkg
+
+
+	tldr (dont read)
+
+	pip install
+	pip uninstall
+       
+        cd (man cd 不好使   因为cd是内置的函数)
+ 	cd /home
+   	cd .. / .
+	cd ~
+	cd
+	cd -   (返回上次执行cd前的位置)
+	cd $HOME
+
+        ls
+	ls -a  (列出所有文件 包括隐藏)
+        
+	ls -l  (列出list 信息)    //ls -al 两者结合
+	ls -ll
+	ls 文件
+	ls 路径
+
+        mkdir 创建文件
+  	mkdir -p  顺便将文件路径都创建出来
+
+        rm -f  强制删除
+	rm -r  递归删除
+	rm -rf 
+
+        cp -i（文件 目录    文件 文件  目录 目录）
+	cp -r
+  	cp -a 保留权限信息 （如果已经有该文件，则将复制到此文件下）
+
+        cat 文件名 (获取文件内容)
+       	cat less 文件名       可以上下移动
+       	cat more             可以向下移动
+       	cat tail n           尾部n行
+       	cat head n           头部n行
+   
+        echo 文本 相当于 printf
+     	echo 文本 > 文件  覆盖该文件  (可用于清空文件)
+       	echo 文本 >> 文件 追加写该文件  (若输出变量  则A  $A)  
+
+        pwd
+        
+        alias       重命名  (直接执行这个命令会显示所有重命名变量)
+        如 alias ll='ls -al' 
+        
+        $?  执行上一次程序返回的值  正常运行 返回0 错误运行返回 -1
+	如 ls ; echo $?   正确自行  将输出 0gg     
+
+	$0  当前参数列表第一个参数 (脚本语言  比如  echo $0  输出bash)
+
+        kill pid 杀死进程
+	kill -9 pid 强制杀死进程
+	pkill 进程名  杀死进程
+	jobs 查看挂起
+	fg   前台唤醒
+       	bg   后天
+	ps   查看进程	
+        
+	
+
+#免密操作实践(私钥 公钥 配对原理): 
+#  ssh-keygen (在/home/qx/.ssh 文件下生成 id_rsa.pub 私钥文件  .ssh  以.开头为隐藏文件)
+#  提示生成文件名 直接回车
+#  提示生成公密码 直接回车代表免密
+#  scp id_rsa.pub qx@192.168.1.40:/home/qx/.ssh/authorized_keys   (scp 为跨主机复制指令 第一个参数是要被复制的文件  第二个参数 是 跨主机名：复制的目标目录文件   将rsa.pub复制到 目录机的.ssh/authorized_keys  这个文件是公网密码文件)
+
+# 配置变量
+# 全局  所有软件都能访问到
+#      /etc/Vim
+#      /etc/http.conf
+#      /etc/profile         登录配置变量
+#      /etc/hash.barc       shell 配置变量
+  
+# 用户  只有该用户登录才有效果
+#      .vim
+#      .ssh
+#      .bashrc
+#      .hash
+#      .profile            用户登录
+#      .bashrc             用户bash
+
+
+
+#C 语言 主函数有三个参数
+#第一个 是 参数列表  第二个是 参数个数  第三个是环境变量
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

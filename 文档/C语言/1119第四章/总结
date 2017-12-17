@@ -1,0 +1,74 @@
+类型转换实验
+
+
+
+    int a = 0x0fff0001;
+    a = (char)a;    
+    int b = a + 1;
+    char c =  a + 1;
+    printf("%d\n", b);
+    printf("%d\n", c);
+   
+    和
+    int a = 0x0fff0001;
+    a = (char)a; 
+    a = (int)a;   
+    int b = a + 1;
+    char c =  a + 1;
+    printf("%d\n", b);
+    printf("%d\n", c);
+
+   输出结果为
+   2
+   2
+ 而
+        int a = 0x0fff0001;
+	//a = (char)a;    
+	int b = a + 1;
+	char c =  a + 1;
+	printf("%d\n", b);
+	printf("%d\n", c);
+   输出结果为	
+   0xffff0001 (十进制)
+   2
+   结论 1： 转型的过程中,可能对变量重新分配空间，或者 对高位清零
+
+
+   int a = 0x0fff0001;
+    char *p = (char *)(&a);
+    p += 3;
+    
+    
+    a = (char)a;
+    printf("%d %p\n", *p, &a);
+    a = (int)a;
+    printf("%d %p\n", *p, &a);
+    a = (double)a;
+    printf("%d %p\n", *p, &a);
+    int b = a + 1;
+    char c =  a + 1;
+    printf("%d\n", b);
+    printf("%d\n", c);
+    输出结果为 : 三个地址相同
+    结论:    无论向大类型还是小类型转型，都是对高位清零
+
+   
+    int a = 0x0fff0001;
+    char *p = (char *)(&a);
+    p += 3;
+    printf("%d %p\n", *p, &a);
+    
+    a = (char)a;
+    printf("%d %p\n", *p, &a);
+    a = (int)a;
+    printf("%d %p\n", *p, &a);
+    *p = 0xf;
+    int b = a + 1;
+    char c =  a + 1;
+    printf("%d\n", b);
+    printf("%d\n", c);
+    输出的结果为: b 的值不是2
+    结论: 在a高位清零后,对a的高位赋值，尽管a的类型是8位，赋值时，仍将 已被赋值的高位赋值到b中
+
+
+  

@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <inttypes.h>
+
+#define debug  //可以不在此添加#define 编译时可以携程 "g++ lianxi.cpp -Ddebug -D** -Dxxx ..-Dxx -o lx"
+
+
+#ifdef debug
+#define LOG(format, a...) {   \
+		printf("%s\n",__FILE__); \
+		printf("%s\n",__func__); \
+		printf("%d\n",__LINE__); \
+		printf(format, ##a);	 \
+	}
+#else
+#define LOG(format, a...) {   \
+	}
+#endif
+
+int main()
+{
+
+	int a = 1;
+	double b = 2;
+	LOG("%d,%lf\n",a,b);
+}
+
+
+
+
+/*
+#define  P(n)
+{
+	printf("%s := %d\n", #a, a);
+}
+t = 2
+调用使用P(t)时
+输出: t ：= 2
+(#a  就是取变量名字)
+
+
+
+宏 最核心作用: 可以在预编译阶段修改代码
+特殊的宏: 
+  __FILE__(%s)  代码的文件名
+  __LINE__(%d)  代码的行数
+  __func__(%s)  代码出现的函数
+
+
+#define PASTE(a,b) (a##b)
+int hehe = 1;
+printf("%d",PASTE(he,he));
+(将输出 1  ##  将代码连接 )
+
+
+
+*/

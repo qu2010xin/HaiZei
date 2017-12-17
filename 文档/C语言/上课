@@ -1,0 +1,52 @@
+复杂结构
+	void 可以声明指针变量,但不能声明非指针变量（因为指针的占内存相同,但变量都不一定）
+    
+	联合体类型 内部的变量的空间是公用的
+    
+    #typedef:
+			1：#define typedef 的区别
+					当 (#define my_char char*)  (typedef char* my_char)时    
+					   my_char a,b             my_char a,b
+					   sizeof(a)  sizeof(b)   sizeof(a) sizeof(b)
+					   4          1           4         4
+					   因为宏替换 my_char之后是 char *a,b 导致 b不是指针类型  而typedef 之后,a,b都是指针类型
+    
+		    2：typedef struct node { int x,y,z;} node; 这里出现了两个node 并没有出现错误，
+		    因为  第一个node 是与struct 连在一起的struct node 一起  是一个类型， 
+		    而后面的node 是typedef定义后表示将node 等同于struct node 当然  第二个node 可以是其他名字
+    
+		    3：typedef struct node{
+		    		struct node a;   //这里必须是struct node 而不是 node 因为  编译是从上向下编译的,所以第二个node还没有被声明
+		    }node;
+    
+    
+	直接访问  a.x
+	间接访问  a->x
+
+main函数
+
+	int main();
+
+	int main(int argc, char *argv[]); 
+	         参数个数   参数
+	        int main(int argc, int *argv[])
+			{
+				for(int i = 0; i < argc; i++)
+				{
+					printf("%s\n", argv[i]);
+				}
+			}
+			//执行程序时  输入./lx 1 2 3 4将输出./lx 1 2 3 4
+
+			 //例子: ls -l 等
+			 
+			加密程序:
+
+
+
+	int main(int argc, char *argv[], char **env);
+
+
+
+
+

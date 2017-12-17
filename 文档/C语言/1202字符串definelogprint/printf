@@ -1,0 +1,139 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <inttypes.h>
+#include <stdarg.h>
+
+char ss[16] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+
+
+
+int testBigEnded()
+{
+	static int temp = 0x01000002;
+	static int ret = (*((char *)&temp) == 0x01);
+	return ret;
+}
+
+int print(const char *format, ...)
+{
+	va_list arg;
+	va_start(arg, format);
+	int i = 0, ret = 0;
+	while(format[i])
+	{
+		if(format[i] == '%')
+		{
+			++i;
+			switch (format[i])
+			{
+				case '%': putchar('%'),++ret;break;
+				case 'd':{
+					int temp = va_arg(arg, int);
+					char c;
+					while(temp > 0)
+					{
+						putchar(temp%10);
+					}
+				}
+				case 'x':{
+/*
+					int temp = va_arg(arg,int);
+					unsigned int num = temp;
+					if(temp < 0)
+					{
+						num = UINT32_MAX + temp + 1;
+						
+					}
+					int digit = pow(16, floor(log10(num)/log10(16)));
+					if(digit == 0) { putchar('0'),++ret;break; }
+					while(digit)
+					{
+						putchar(ss[num / digit]),++ret;
+						num %= digit;
+						digit/=16;
+					}
+					break;
+*/
+					int temp = va_arg(arg,int);
+					unsigned int num = 0, num2 = temp;
+					int sum_s = 0;
+					while(num2){
+						num = (num << 4) | (num2 & 15);
+						num2 >>= 4;
+					}				
+					do{
+						if((num & 15) >= 10){
+							putchar((num & 15) + 'a' - 10), ++ret;
+						}else{
+							putchar((num & 15) + '0'),++ret;
+						}
+						num >>= 4;
+					}while(num);
+		/*
+		 			while(sum_s){
+						if((num & 15) >= 10){
+							putchar((num & 15) + 'a' - 10), ++ret;
+						}else{
+							putchar((num & 15) + '0'),++ret;
+						}
+						num >>= 4;
+						sum_s--;
+					}
+		 */
+					break;	
+		/*		   unsigned  temp = va_arg(arg,int);
+				    unsigned char *num = (unsigned  char *)&temp;
+				    if(temp == 0) { putchar('0'),++ret;break; }
+				    if(!testBigEnded())
+				    {
+				    	printf("this is little head\n");
+				    	int flag = 0;
+				    	for(int i = 3; i >= 0; i--)
+				    	{
+				    		if(num[i] / 16 > 0||flag) putchar(ss[num[i]/16]),++ret,flag = 1;
+				    		if(num[i] % 16 > 0||flag) putchar(ss[num[i]%16]),++ret,flag = 1;
+
+				    	}
+				    }
+				    else if(testBigEnded())
+				    {
+				    	printf("this is little head\n");
+				    	int flag = 0;
+				    	for(int i = 0; i <= 3; i++)
+				    	{
+				    		if(num[i] / 16 > 0||flag) putchar(ss[num[i]/16]),++ret,flag = 1;
+				    		if(num[i] % 16 > 0||flag) putchar(ss[num[i]%16]),++ret,flag = 1;
+
+				    	}
+				    }
+				    break;*/
+
+				}
+				default :{
+					printf("no\n");
+					break;
+				}
+			}
+
+		}
+		else
+		{
+			putchar(format[i]);
+			++ret;
+		}
+		i++;
+	} 
+	return ret;
+}
+
+int main()
+{
+	int n;
+	while(scanf("%d", &n))
+	{
+		print("%x",n);
+		printf("\n%x\n",n);
+	}
+	
+}

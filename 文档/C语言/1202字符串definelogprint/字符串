@@ -1,0 +1,63 @@
+/*
+strlen(str)
+strcmp（）  //字符串比较   每一位进行相减, 知道有一相减不是0  或者 两者都到结尾了
+strcpy
+strncmp()  //安全  常用
+strncpy    //安全  常用
+memcpy
+memcmp(str, str, n)   
+memset(str, c, n)     将连续的字节设置成c   （若c为 1  如果初始化的是整形 数组  则每个数都是  0x01010101  并不是将数组设置为1)
+
+sscanf(str, format,a...)
+sprintf(str, format,a...)
+*/
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <inttypes.h>
+
+int Strcmp(const char *s1,const char *s2) //若传入的参数是  常量:"hello"  而参数定义的是地址
+{
+
+	uint64_t i = 0;
+	while((s1[i]!='\0'||s2[i]!='\0')&&((s1[i] - s2[i])==0)) i++;
+	return (s1[i] - s2[i]);	
+
+}
+
+uint64_t Strlen(const char *s1)
+{
+	uint64_t i = 0;
+	while(!s1[i]) i++;
+	return i;
+}
+
+int Strncmp(const char *s1,const char *s2,const uint64_t n) //若传入的参数是  常量:"hello"  而参数定义的是地址
+{
+	
+	uint64_t i = 0;
+	while((s1[i]!='\0'&&s2[i]!='\0')&&((s1[i] - s2[i])==0)&&i < n) i++;
+	if(i == n) return 0;	
+	return (s1[i] - s2[i]);	
+
+}
+
+
+int main()
+{
+	char s1[20] = "helllo word haha";
+	char s2[20];
+	int ret;
+  /*  ret = sscanf(s1,"%s%[^$]s",s2,s1);	
+	printf("%d %s\n %s\n", ret,s2,s1);
+	ret = sscanf(s1,"%s%[^$]s",s2,s1);	
+	printf("%d %s\n %s\n", ret,s2,s1);
+	ret = sscanf(s1,"%s%[^$]s",s2,s1);	
+	printf("%d %s\n %s\n", ret,s2,s1);
+	ret = sscanf(s1,"%s%[^$]s",s2,s1);	
+	printf("%d %s\n %s\n", ret,s2,s1);*/
+	int a;
+	scanf("%d", &a);
+	a = sprintf(s1,"%x", a);
+
+}

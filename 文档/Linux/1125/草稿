@@ -1,0 +1,109 @@
+
+        操作体统安装
+   	     	引导
+	     	挂载
+	     	空间
+	        启动方式  1：EFI 系统分区(系统引导程序在这个系统分区中  /dev/sdb2 分区)   2: BIOS 
+		安装方式  
+ 		        移动设备
+			镜像
+			网络：局域网唤醒   通过DHCP分配IP(PXE)  寻找FTP服务器  安装
+	
+        
+	shell 
+
+	    **路径**	
+                相对路径
+		当前路径
+		远程路径  一般方法 协议：//用户名:密码@位置/路径:端口  (可通过更改 /etc/hosts  文件 可用其他符号替代ip串)  
+       
+	    **软件**
+		bin   存放可执行文件
+		lib   存放库文件
+		share 存放共享文件
+		var   日志文件
+		/etc  配置文件存放路径
+     	    
+    	    **文件类型(7种)**
+		-  普通文件    正常文件 二进制文件 特殊数据文件
+		d  目录文件
+		l  link 连接
+		b  block 块设备
+		c  character 字符设备 串口设备 键盘 鼠标
+		s  soket 套接字
+		p  pipe 管道文件
+
+	    **文件权限**
+		-rwxrwxrwx (-ugo)
+		chmod  更改文件权限
+			chmod 755 filee
+
+			chmod a+x file
+			chmod o-x file
+			chmod u=rwx,go=r file
+		chown  更改文件所属用户
+			chown 所属用户:所属组  file (若是目录文件，则该目录下全部被更改)
+			chown 所属用户 file
+		chgrp  
+			chgrp 所属组 file
+
+	    **用户**
+		超级用户
+		用户
+		root用户
+		切换用户
+			su qx   su - qx  (区别  加-在切换后仍可保持切换前所在的目录)
+
+	    **man**
+		-f ls 显示ls的简略信息 
+		-k ls ls相关的文件信息
+
+  	    **通配符**
+		*0
+		[!]
+		[]
+		[0-9]
+  	
+	启动流程
+		1.开机键
+		2.	
+		第一个进程：(pstree命令)systemd
+
+	配置信息文件
+
+		/home 下的 .bash_logout
+		/home 下的 .bashrc
+		/home 下的 .profile
+		/etc  下的  bash.bashrc
+		/etc  下的  profile
+
+
+
+
+#实践  在 .bashrc添加变量  使下次切换某一目录更加方便
+#root用户touch qx用户家目录文件时，导致某些文件所属者变为root  希望当root退出时将这些文件改回
+
+#记录
+#qx下的 .bash_logout 是qx终端退出时的执行文件，但是在桌面系统下并不能奏效，非桌面系统可以
+
+
+
+#作业  登录bash时 几个配置文件的顺序
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	     		 

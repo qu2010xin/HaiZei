@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <inttypes.h>
+int sz[105][500][100] = {0};
+#define max(a,b) ({\
+	__typeof()
+})
+int main()
+{
+	
+	sz[1][0][0] = 2;
+	sz[1][1][0] = sz[1][2][0] = 1;
+	sz[1][1][1] = sz[1][2][1] = 1;
+	for(int i = 2; i <= 100; i++)
+	{
+		sz[i][0][0] = sz[i - 1][0][0] + 1;
+		sz[i][1][0] = sz[i][sz[i][0][0]][0] = 1;
+		sz[i][1][1] = sz[i][sz[i][0][0]][1] = 1;
+		for(int j = 2; j <  sz[i][0][0]; j++)
+		{
+			int *p = sz[i - 1][j];
+			int *q = sz[i - 1][j - 1];
+			int *pq = sz[i][j];
+			int *min_n ,*max_n;
+			if(p[0] > q[0]) 
+			{
+				min_n = q;max_n = p;
+			}
+			else 
+			{
+				min_n = p;max_n = q;
+			}
+			pq[0] = max_n[0];
+			for(int k = 1; k <= max_n[0]; k++)
+			{
+				if(k <= min_n[0])  pq[k] += min_n[k];
+
+				pq[k] += max_n[k];
+			}
+			for(int k = 1; k <= pq[0]; k++)
+			{
+				if(pq[k] < 10) continue;
+				pq[k + 1] += pq[k]/10;
+				pq[k]%=10;
+				if(k == pq[0]) pq[0]++;
+			}
+
+		}
+	}
+	int n;
+	while(~scanf("%d", &n))
+	{
+		for(int i = 1; i <= sz[n][0][0]; i++)
+		{
+			for(int j = sz[n][i][0]; j > 0; j--)
+			{
+				printf("%d", sz[n][i][j]);
+			}
+			if(i < sz[n][0][0]) printf(" ");
+		}
+		printf("\n");
+	}
+
+}

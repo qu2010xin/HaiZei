@@ -1,0 +1,43 @@
+
+
+
+all:    
+	 g++ src/*.cc *.cpp -I./include -o ./bin/test
+run:    
+	 ./bin/test
+clean:  	
+	 rm -rf ./bin/test *.o
+  all run clean 是虚拟目标
+  执行上面后面的命令  直接用  make all  make clean 等
+  但是如果  (真是存在)(或者存在 但是其依赖的文件比它新)all run目标的话 就不执行后面命令
+  所以需要在上面加上:   .PHONY : clean all run
+.PHONY : clean all run  
+ all:    
+	 g++ src/*.cc *.cpp -I./include -o ./bin/test
+run:    
+	 ./bin/test
+clean:  	
+	 rm -rf ./bin/test *.o
+
+
+
+
+
+上面的是一次生成可执行文件  没有生成.o文件  下面是分两步的操作:  .c --> .o --> 执行恩健
+all:  ./bin/unit.o ./bin/main.o  
+	g++ unit.o main.o -o ./bin/test
+./bin/unit.o:  ./include/unit.h ./src/unit.cc           
+	g++ -c ./src/unit.c -I./include -o ./bin/unit.o
+./bin/main.o: ./main.cpp
+	g++ -c main.cpp -I./include  -o ./bin/main.o
+	
+clean:  	
+	 rm -rf ./bin/test *.o
+
+
+单独建立测试用例文件并测试函数
+
+后面依赖的文件  一定写上  因为 如果依赖的文件没有改动就不在编译 一旦有改动则重新编译
+
+为什么  将测试用例和测试框架 分开来  而不是每一次都拷贝开发代码进行测试
+工作不会浪费掉  开发人员可以在一次调用这个测试接口
